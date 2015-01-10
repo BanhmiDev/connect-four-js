@@ -1,0 +1,47 @@
+body{
+    background:#fff;
+    font-family:'Arial';
+    font-size:100%
+}
+#container{
+    width:600px;
+    margin:50px auto;
+    font-size:1.6em;
+    color:#333;
+}
+h1{
+    font-size: 2.5em;
+    line-height:1;
+    margin:0 0 0 -5px;
+    padding:0;
+}
+h3{
+    line-height:1;
+    margin:5px 0;
+}
+a{
+    color:#DC143C;
+    border-bottom:1px dashed #DC143C;
+    text-decoration:none;
+}
+a:hover{
+    border-bottom:none;
+}
+.sub-title{
+    margin-bottom:15px;
+    font-size:0.7em;
+}
+ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+::selection {color:#fff;background:#333}
+::-moz-selection {color:#fff;background:#333;} 
+p{
+    margin:0;
+    padding:0;
+}
+.subcontainer{
+    margin-bottom:20px;
+}

@@ -1,0 +1,232 @@
+body {
+    background: #fff;
+    color: #333;
+    font-family: 'Arial';
+    overflow-y: hidden;
+}
+
+a, a:visited{
+    color: #551A8B;
+}
+
+h1 {
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: 600px;
+    margin: 40px auto;
+}
+
+.box-links {
+    overflow: hidden;
+}
+
+#spielfeld {
+    border-collapse:collapse;
+}
+
+#coinfeld {
+    position: relative;
+    width: 100%;
+    height: 55px;
+}
+
+#spielfeld td {
+    border: 1px dashed #808080;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+#spielfeld td:hover::after {
+    background-color: #F4F4F4;
+    content: '';
+    height: 10000px;
+    left: 0;
+    position: absolute;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
+}
+
+.beendet td:hover::after{
+    background-color: transparent !important;
+}
+
+#spielfeld .coin {
+    cursor: default;
+}
+
+#spielfeld .spieler-coin {
+    border-radius: 50%;
+    background: #333;
+}
+
+#spielfeld .cpu-coin {
+    border-radius: 50%;
+    background: #DC143C;
+}
+
+#spielfeld .win {
+    border-radius: 50%;
+    animation: animationFrames 1s infinite;
+    -webkit-animation: animationFrames 1s infinite;
+    -moz-animation: animationFrames 1s infinite;
+    -o-animation: animationFrames 1s infinite;
+    -ms-animation: animationFrames 1s infinite;
+}
+
+@keyframes animationFrames{
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-moz-keyframes animationFrames{
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes animationFrames {
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-o-keyframes animationFrames {
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-ms-keyframes animationFrames {
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+#debug {
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+.box-rechts {
+    margin: 30px 10px 10px 0;
+    float: left;
+}
+
+.box-links {
+    position: relative;
+    margin: 10px 10px 10px 0;
+    float: left;
+}
+
+#optionen {
+    font-size: 13px;
+}
+
+input {
+    border: 1px solid #808080;
+    margin: 1px;
+    outline: none;
+}
+
+.input {
+    width: 20px;
+}
+
+.speichern {
+    border: 1px solid #808080;
+    margin: 1px;
+    outline: none;
+    width: 125px;
+    cursor: pointer;
+}
+
+.speichern:hover, .speichern:active {
+    background: #dadada;
+}
+
+#laden {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+    background: #DC143C;
+    color: #fff;
+    padding: 4px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.status-aktiv, .status-gewonnen, .status-verloren {
+    padding: 0px 2px;
+    color: #333;
+}
+
+.status-aktiv {
+    background: #ccc;
+}
+
+.status-gewonnen {
+    background: #5FBF5F;
+}
+
+.status-verloren {
+    background: #F36051;
+}
+
+.status-unentschieden {
+    background: #A4E7F0;
+}
+
+select {
+    background: #fff;
+    margin: 1px;
+    border: 1px solid #808080;
+    outline: none;
+    width: 125px;
+}
+
+.text {
+    font-size:12px;
+    font-weight:bold;
+    color: #4C4C4C;
+}
+
+.text a {
+    color:#333;
+}
+
+.oben-text {
+    margin-bottom: 5px !important;
+    margin-left: 2px !important;
+}
+
+.unten-text {
+    margin-left: 3px !important;
+}
