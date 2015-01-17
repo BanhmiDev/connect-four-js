@@ -3,58 +3,58 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="Eine Künstliche Intelligenz basierend auf dem Minimax Algorithmus">
+        <meta name="description" content="Artificial Intelligence based on the Minimax- and α-β-Pruning principles.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex" />
-        <title>Vier Gewinnt - Alpha-Beta Algorithmus</title>
+        <title>Four Connect - Alpha-Beta Algorithm</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div id="container">
-            <h1 class="oben-text">Alpha-Beta Algorithmus</h1>
+            <h1 class="oben-text">Alpha-Beta Algorithm</h1>
             <p class="text unten-text">
-                Vier Gewinnt nach dem Minimax-Prinzip (+ α-β). jQuery/Animierte Variante.<br/>
-                Alternative ohne Animationen <a href="../version1/index.html">hier</a> zufinden.
+                Artificial Intelligence based on the Minimax- and α-β-Pruning principles (jQuery).
             </p>
 
             <div class="box-links">
                 <div id="coin"></div>
                 <table id="spielfeld" cellpadding="0"></table> 
-                <div id="laden">Computer denkt nach...</div>
+                <div id="laden">AI is thinking...</div>
             </div>
 
             <div class="box-rechts">
                 <div id="optionen">
-                    <p class="header">Algorithmus</p>
+                    <p class="header">Algorithm</p>
                     <p>
                         <select id="algorithm-select" autocomplete="off">
                             <option value="minimax">Minimax</option>
                             <option value="alphabeta" selected>Alpha-Beta</option>
                         </select>
                     </p>
-                    <p class="header">Schwierigkeit</p>
+                    <p class="header">Difficulty</p>
                     <p>
-                    <p><select id="schwierigkeit" autocomplete="off">
-                            <option value="1">Tiefe 1</option>
-                            <option value="2">Tiefe 2 (Passiv)</option>
-                            <option value="3">Tiefe 3</option>
-                            <option value="4" selected="selected">Tiefe 4 (Leicht)</option>
-                            <option value="5">Tiefe 5</option>
-                            <option value="6">Tiefe 6 (Mittel)</option>
-                            <option value="7">Tiefe 7</option>
-                            <option value="8">Tiefe 8 (Schwer)</option>
+                    <p>
+                        <select id="schwierigkeit" autocomplete="off">
+                            <option value="1">Depth 1</option>
+                            <option value="2">Depth 2 (Passive)</option>
+                            <option value="3">Depth 3</option>
+                            <option value="4" selected="selected">Tiefe 4 (Easy)</option>
+                            <option value="5">Depth 5</option>
+                            <option value="6">Depth 6 (Moderate)</option>
+                            <option value="7">Depth 7</option>
+                            <option value="8">Depth 8 (Tougher)</option>
                         </select>
                     </p>
-                    <p><button class="speichern" onclick="spielNeustarten();" type="submit">Spiel neustarten</button></p>
+                    <p><button class="speichern" onclick="spielNeustarten();" type="submit">Restart game</button></p>
                 </div>
 
                 <div id="debug">
-                    <p><strong>Daten des letzten Zugs</strong></p>
-                    <p>Generiert mit <span id="wurf">?</span> Iterationen</p>
-                    <p>Gemessen mit <span id="zeit">?</span></p>
-                    <p><span id="zug">Spalte: ?<br/>Bewertung: ?</span></p>
+                    <p><strong>AI debugging</strong></p>
+                    <p>Generated with <span id="ai-iterations">?</span> iterations</p>
+                    <p>Measured with <span id="ai-time">?</span></p>
+                    <p><span id="ai-column">Column: ?</span></p>
+                    <p><span id="ai-score">Score: ?</span></p>
                     <br/>
-                    <p>Status: <span id="status" class="status-aktiv">läuft</span></p>
+                    <p>Status: <span id="status" class="status-aktiv">running</span></p>
                 </div>
             </div>
         </div>

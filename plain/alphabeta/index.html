@@ -5,34 +5,30 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Artificial Intelligence based on the Minimax- and α-β-Pruning principles.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Four Connect - Minimax Algorithm</title>
+        <title>Four Connect - Minimax Algorithm (+ α β)</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div id="container">
-            <h1 class="oben-text">Minimax Algorithm</h1>
+            <h1 class="oben-text">Minimax Algorithmus (+ α-β)</h1>
             <p class="text unten-text">
-                Artificial Intelligence based on the Minimax- and α-β-Pruning principles (jQuery).
+                Artificial Intelligence based on the Minimax- and α-β-Pruning principles.
             </p>
 
             <div class="box-links">
-                <div id="coin"></div>
+                <table id="spielfeld" cellpadding="0"></table> 
+                <div id="laden">AI is thinking...</div>
+            </div>
+
+            <div class="box-links">
                 <table id="spielfeld" cellpadding="0"></table> 
                 <div id="laden">AI is thinking...</div>
             </div>
 
             <div class="box-rechts">
                 <div id="optionen">
-                    <p class="header">Algorithm</p>
-                    <p>
-                        <select id="algorithm-select" autocomplete="off">
-                            <option value="minimax" selected>Minimax</option>
-                            <option value="alphabeta">Alpha-Beta</option>
-                        </select>
-                    </p>
-                    <p class="header">Difficulty</p>
-                    <p>
-                        <select id="schwierigkeit" autocomplete="off">
+                    <p>Difficulty</p>
+                    <p><select id="schwierigkeit" autocomplete="off">
                             <option value="1">Depth 1</option>
                             <option value="2">Depth 2 (Passive)</option>
                             <option value="3">Depth 3</option>
@@ -58,15 +54,7 @@
             </div>
         </div>
 
-        <script src="js/jquery-1.11.2.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
         <script src="js/brett.js"></script>
         <script src="js/viergewinnt.js"></script>
-
-        <script>
-        $('#algorithm-select').change(function() {
-            window.location = '../' + $(this).val() + '/index.html';
-        });
-        </script>
     </body>
 </html>

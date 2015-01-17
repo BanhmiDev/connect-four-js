@@ -1,5 +1,5 @@
-// Last update: 10/01/2015
-// TODO: TRANSLATE
+// Last update: 16/01/2015
+// TODO: CLEAN CODE
 
 // Minimax Implementation
 // Spieldaten/Einstellungen
@@ -95,14 +95,15 @@ function computerZug() {
             var ki_zug = maxZug(spiel, viergewinnt.tiefe);
 
             var laufzeit = new Date().getTime() - startzeit;
-            document.getElementById('zeit').innerHTML = laufzeit.toFixed(2) + 'ms';
+            document.getElementById('ai-time').innerHTML = laufzeit.toFixed(2) + 'ms';
 
             // Durch Algorithmus bekommen des besten Zugs und einsetzen
             steinSetzen(ki_zug[0]);
 
             // Weitere Statistik anzeigen
-            document.getElementById('zug').innerHTML = 'Spalte: ' + parseInt(ki_zug[0] + 1) + '<br/>Bewertung: ' + ki_zug[1];
-            document.getElementById('wurf').innerHTML = viergewinnt.iteration;
+            document.getElementById('ai-column').innerHTML = 'Column: ' + parseInt(ki_zug[0] + 1);
+            document.getElementById('ai-score').innerHTML = 'Score: ' + ki_zug[1];
+            document.getElementById('ai-iterations').innerHTML = viergewinnt.iteration;
 
             document.getElementById('laden').style.display = "none"; // Nachricht entfernen
         }, 100);
@@ -258,16 +259,16 @@ function updateStatus() {
     var html = document.getElementById('status');
     if (viergewinnt.status == 0) {
         html.className = "status-aktiv";
-        html.innerHTML = "läuft";
+        html.innerHTML = "running";
     } else if (viergewinnt.status == 1) {
         html.className = "status-gewonnen";
-        html.innerHTML = "gewonnen";
+        html.innerHTML = "won";
     } else if (viergewinnt.status == 2) {
         html.className = "status-verloren";
-        html.innerHTML = "verloren";
+        html.innerHTML = "lost";
     } else {
         html.className = "status-unentschieden";
-        html.innerHTML = "unentschieden";
+        html.innerHTML = "tie";
     }
 }
 
@@ -289,9 +290,10 @@ function spielNeustarten() {
         viergewinnt.status = 0;
         viergewinnt.runde = 0;
         spielfeldAnzeigen();
-        document.getElementById('wurf').innerHTML = "?";
-        document.getElementById('zeit').innerHTML = "?";
-        document.getElementById('zug').innerHTML = "Spalte: ?<br/>Bewertung: ?";
+        document.getElementById('ai-iteration').innerHTML = "?";
+        document.getElementById('ai-time').innerHTML = "?";
+        document.getElementById('ai-column').innerHTML = "Column: ?";
+        document.getElementById('ai-score').innerHTML = "Score: ?";
         document.getElementById('spielfeld').className = "";
         updateStatus();
     }

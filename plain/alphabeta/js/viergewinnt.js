@@ -1,4 +1,4 @@
-// Minimax Implementation
+// Minimax Implementation (+ Alpha-Beta Erweiterung)
 // Spieldaten/Einstellungen
 viergewinnt = {
     'hoehe': 6,
@@ -48,12 +48,13 @@ function steinSetzen(spalte) {
         if (!spiel.steinSetzen(spalte)) { // Im Hauptarray einfügen falls gültig
             return alert("Ungültiger Zug!");
         }
+
         // Runde wechseln
         viergewinnt.runde = rundeWechseln(viergewinnt.runde);
         // Spielstatus checken
         updateStatus();
     } else {
-    	// Spiel ist beendet
+        // Spiel ist beendet
         alert("Spiel entschieden!\nStarte das Spiel neu.")
     }
 }
@@ -76,14 +77,15 @@ function computerZug() {
             var ki_zug = maxZug(spiel, viergewinnt.tiefe);
 
             var laufzeit = new Date().getTime() - startzeit;
-            document.getElementById('zeit').innerHTML = laufzeit.toFixed(2) + 'ms';
+            document.getElementById('ai-time').innerHTML = laufzeit.toFixed(2) + 'ms';
 
             // Durch Algorithmus bekommen des besten Zugs und einsetzen
             steinSetzen(ki_zug[0]);
 
             // Weitere Statistik anzeigen
-            document.getElementById('zug').innerHTML = 'Spalte: ' + parseInt(ki_zug[0] + 1) + '<br/>Bewertung: ' + ki_zug[1];
-            document.getElementById('wurf').innerHTML = viergewinnt.iteration;
+            document.getElementById('ai-column').innerHTML = 'Column: ' + parseInt(ki_zug[0] + 1);
+            document.getElementById('ai-score').innerHTML = 'Score: ' + ki_zug[1];
+            document.getElementById('ai-iterations').innerHTML = viergewinnt.iteration;
 
             document.getElementById('laden').style.display = "none"; // Nachricht entfernen
         }, 100);
@@ -122,7 +124,6 @@ function spielfeldAnzeigen() {
 
     // Listener für Aktionen
     var td = document.getElementById('spielfeld').getElementsByTagName("td");
-
     // Internet Explorer Unterstützung
     for (var i = 0; i < td.length; i++) {
         if (td[i].addEventListener) {
@@ -135,9 +136,9 @@ function spielfeldAnzeigen() {
 
 /**
  * ALGORITHMUS
- * Hauptfunktion für die KI (Minimax Prinzip)
+ * Hauptfunktion für die KI (Minimax mit Alpha-Beta Suche)
  */
-function maxZug(brett, tiefe) {
+function maxZug(brett, tiefe, alpha, beta) {
     // Bewertung für das Spielfeld aufrufen
     var bewertung = brett.bewertung();
 
@@ -156,21 +157,24 @@ function maxZug(brett, tiefe) {
 
             viergewinnt.iteration++; // Statistik
 
-            var naechster_zug = minZug(neues_brett, tiefe - 1); // Rekursiv aufrufen und Tiefe runterzählen
+            var naechster_zug = minZug(neues_brett, tiefe - 1, alpha, beta); // Rekursiv aufrufen
 
-            // Neuen Zug evaluieren, falls besser oder noch in der Anfangsphase (null)
+            // Neuen Zug evaluieren, falls besser oder noch in der Anfangsphase [Spalte 0]
             if (max[0] == null || naechster_zug[1] > max[1]) {
                 // Falls neuer Zug größere Bewertung hat, dann setzen
                 max[0] = spalte;
                 max[1] = naechster_zug[1];
+                alpha = naechster_zug[1]; // Übergabe
             }
+
+            if (alpha >= beta) return max; // Alpha Beta
         }
     }
 
     return max; // Rückgabe des max-Zuges
 }
 
-function minZug(brett, tiefe) {
+function minZug(brett, tiefe, alpha, beta) {
     var bewertung = brett.bewertung();
 
     // Abbruchfunktion
@@ -188,16 +192,20 @@ function minZug(brett, tiefe) {
 
             viergewinnt.iteration++; // Statistik
 
-            var naechster_zug = maxZug(neues_brett, tiefe - 1); // Rekursiv aufrufen
+            var naechster_zug = maxZug(neues_brett, tiefe - 1, alpha, beta); // Rekursiv aufrufen
 
-            // Neuen Zug evaluieren, falls besser oder noch in der Anfangsphase (null)
+            // Neuen Zug evaluieren, falls besser oder noch in der Anfangsphase [Spalte 0]
             if (min[0] == null || naechster_zug[1] < min[1]) {
                 min[0] = spalte;
                 min[1] = naechster_zug[1];
+                beta = naechster_zug[1]; // Übergabe
             }
+
+            if (beta <= alpha) return min; // Alpha Beta
 
         }
     }
+
     return min;
 }
 
@@ -239,16 +247,16 @@ function updateStatus() {
     var html = document.getElementById('status');
     if (viergewinnt.status == 0) {
         html.className = "status-aktiv";
-        html.innerHTML = "läuft";
+        html.innerHTML = "running";
     } else if (viergewinnt.status == 1) {
         html.className = "status-gewonnen";
-        html.innerHTML = "gewonnen";
+        html.innerHTML = "won";
     } else if (viergewinnt.status == 2) {
         html.className = "status-verloren";
-        html.innerHTML = "verloren";
+        html.innerHTML = "lost";
     } else {
         html.className = "status-unentschieden";
-        html.innerHTML = "unentschieden";
+        html.innerHTML = "tie";
     }
 }
 
@@ -270,9 +278,10 @@ function spielNeustarten() {
         viergewinnt.status = 0;
         viergewinnt.runde = 0;
         spielfeldAnzeigen();
-        document.getElementById('wurf').innerHTML = "?";
-        document.getElementById('zeit').innerHTML = "?";
-        document.getElementById('zug').innerHTML = "Spalte: ?<br/>Bewertung: ?";
+        document.getElementById('ai-iteration').innerHTML = "?";
+        document.getElementById('ai-time').innerHTML = "?";
+        document.getElementById('ai-column').innerHTML = "Column: ?";
+        document.getElementById('ai-score').innerHTML = "Score: ?";
         document.getElementById('spielfeld').className = "";
         updateStatus();
     }
