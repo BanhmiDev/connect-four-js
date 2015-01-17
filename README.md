@@ -1,9 +1,10 @@
-Four Connect JS
+Connect Four JS
 ===============
-A school project.                                          
 Minimax and Alpha-Beta Pruning principles implemented in JavaScript.
 
-English localization coming soon.
+## Running
+Plain javascript and jQuery implementations are located in the `src` directory.
+These are additionally categorized in `minimax` and `alphabeta` folders.
 
 ## Demo
 Currently available on [this site](https://gimu.org/viergewinnt).
