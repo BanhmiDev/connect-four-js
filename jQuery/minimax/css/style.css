@@ -18,7 +18,7 @@ h1 {
 #container {
     position: absolute;
     left: 50%;
-    margin-top: 40px;
+    margin-top: 50px;
     margin-left: -255px;
 }
 
@@ -26,7 +26,7 @@ h1 {
     overflow: hidden;
 }
 
-#spielfeld {
+#game_board {
     border-collapse:collapse;
 }
 
@@ -36,7 +36,7 @@ h1 {
     height: 55px;
 }
 
-#spielfeld td {
+#game_board td {
     border: 1px dashed #808080;
     position: relative;
     width: 50px;
@@ -62,32 +62,32 @@ h1 {
     background-color: transparent !important;
 }
 
-#spielfeld td {
+#game_board td {
     border-radius: 50%;
 }
 
-#spielfeld .coin {
+#game_board .coin {
     cursor: default;
 }
 
-#spielfeld tr {
+#game_board tr {
     width: 100%;
     height: 100%;
 }
 
-#spielfeld .spieler-coin,
-.spieler-coin {
+#game_board .human-coin,
+.human-coin {
     border-radius: 50%;
     background: #333;
 }
 
-#spielfeld .cpu-coin,
+#game_board .cpu-coin,
 .cpu-coin {
     border-radius: 50%;
     background: #DC143C;
 }
 
-#spielfeld .win {
+#game_board .win {
     border-radius: 50%;
     animation: animationFrames 1s infinite;
     -webkit-animation: animationFrames 1s infinite;
@@ -146,18 +146,18 @@ h1 {
     font-size: 11px;
 }
 
-.box-rechts {
+.box-right {
     margin: 20px 10px 10px 0;
     float: left;
 }
 
-.box-links {
+.box-left {
     position: relative;
     margin: 10px 10px 10px 0;
     float: left;
 }
 
-#optionen {
+#options {
     font-size: 13px;
 }
 
@@ -171,19 +171,19 @@ input {
     width: 20px;
 }
 
-.speichern {
+.save {
     border: 1px solid #808080;
     margin: 1px;
     outline: none;
-    width: 125px;
+    width: 140px;
     cursor: pointer;
 }
 
-.speichern:hover, .speichern:active {
+.save:hover, .save:active {
     background: #dadada;
 }
 
-#laden {
+#loading {
     display: none;
     position: absolute;
     top: 10px;
@@ -203,24 +203,24 @@ p {
     margin-top: 10px;
 }
 
-.status-aktiv, .status-gewonnen, .status-verloren {
+.status-running, .status-won, .status-lost {
     padding: 0px 2px;
     color: #333;
 }
 
-.status-aktiv {
+.status-running {
     background: #ccc;
 }
 
-.status-gewonnen {
+.status-won {
     background: #5FBF5F;
 }
 
-.status-verloren {
+.status-lost {
     background: #F36051;
 }
 
-.status-unentschieden {
+.status-tie {
     background: #A4E7F0;
 }
 
@@ -229,7 +229,7 @@ select {
     margin: 1px;
     border: 1px solid #808080;
     outline: none;
-    width: 125px;
+    width: 140px;
 }
 
 .text {
@@ -242,11 +242,56 @@ select {
     color:#333;
 }
 
-.oben-text {
+.header-text {
     margin-bottom: 5px !important;
     margin-left: 2px !important;
 }
 
-.unten-text {
+.subheader-text {
     margin-left: 3px !important;
+}
+
+#navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #333;
+    width: 100%;
+    color: #fff;
+    font-size: 11px;
+    border-bottom: 2px solid #DC143C;
+}
+
+#navigation .title {
+    padding: 5px 0px 6px 4px;
+}
+
+#navigation a {
+    display: inline-block;
+    padding: 5px 0px;
+    color: #fff;
+    font-size: 11px;
+}
+
+#navigation a:hover {
+    text-decoration: none;
+}
+
+
+@media screen and (max-width: 600px) {
+    #container {
+        margin: 0;
+        top: 50px;
+        left: 0;
+        padding: 0 5px;
+    }
+
+    .box-left {
+        float: none;
+    }
+
+    .box-right {
+        display: block;
+        float: none;
+    }
 }
