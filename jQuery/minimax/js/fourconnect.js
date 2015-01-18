@@ -252,10 +252,9 @@ Game.prototype.updateStatus = function() {
 }
 
 Game.prototype.markWin = function() {
-    document.getElementById('game_board').className = "beendet";
-    for (var i = 0; i < that.settings.gewinnarray.length; i++) {
-        var name = document.getElementById('game_board').rows[that.settings.gewinnarray[i][0]].cells[that.settings.gewinnarray[i][1]].className;
-        document.getElementById('game_board').rows[that.settings.gewinnarray[i][0]].cells[that.settings.gewinnarray[i][1]].className = name + " win";
+    for (var i = 0; i < that.settings.winning_array.length; i++) {
+        var name = document.getElementById('game_board').rows[that.settings.winning_array[i][0]].cells[that.settings.winning_array[i][1]].className;
+        document.getElementById('game_board').rows[that.settings.winning_array[i][0]].cells[that.settings.winning_array[i][1]].className = name + " win";
     }
 }
 
@@ -274,7 +273,7 @@ Game.prototype.restartGame = function() {
         document.getElementById('ai-score').innerHTML = "Score: ?";
         document.getElementById('game_board').className = "";
         that.updateStatus();
-        
+
         // Re-assign hover
         $('td').hover(function() {
             $(this).parents('table').find('col:eq('+$(this).index()+')').toggleClass('hover');

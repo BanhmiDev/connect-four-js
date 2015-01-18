@@ -39,7 +39,7 @@ Game.prototype.init = function() {
     for (var i = 0; i < that.settings.hoehe; i++) {
         game_board += "<tr>";
         for (var j = 0; j < that.settings.breite; j++) {
-            game_board += "<td class='leer'></td>";
+            game_board += "<td class='empty'></td>";
         }
         game_board += "</tr>";
     }
@@ -75,24 +75,22 @@ Game.prototype.place = function(column) {
     // If not finished
     if (that.board.score() != that.settings.score && that.board.score() != -that.settings.score && !that.board.isFull()) {
         for (var y = that.settings.hoehe - 1; y >= 0; y--) {
-            if (document.getElementById('game_board').rows[y].cells[column].className == 'leer') {
+            if (document.getElementById('game_board').rows[y].cells[column].className == 'empty') {
                 if (that.settings.round == 1) {
                     document.getElementById('game_board').rows[y].cells[column].className = 'coin cpu-coin';
                 } else {
                     document.getElementById('game_board').rows[y].cells[column].className = 'coin human-coin';
                 }
-                break; // Einmalig
+                break;
             }
         }
 
         if (!that.board.place(column)) {
-            return alert("Ungültiger Zug!");
+            return alert("Invalid move!");
         }
 
         that.settings.round = that.switchRound(that.settings.round);
         that.updateStatus();
-    } else {
-        alert("Game finished!\nRestart the game.")
     }
 }
 
@@ -240,10 +238,10 @@ Game.prototype.updateStatus = function() {
 }
 
 Game.prototype.markWin = function() {
-    document.getElementById('game_board').className = "beendet";
-    for (var i = 0; i < that.settings.gewinnarray.length; i++) {
-        var name = document.getElementById('game_board').rows[that.settings.gewinnarray[i][0]].cells[that.settings.gewinnarray[i][1]].className;
-        document.getElementById('game_board').rows[that.settings.gewinnarray[i][0]].cells[that.settings.gewinnarray[i][1]].className = name + " win";
+    document.getElementById('game_board').className = "finished";
+    for (var i = 0; i < that.settings.winning_array.length; i++) {
+        var name = document.getElementById('game_board').rows[that.settings.winning_array[i][0]].cells[that.settings.winning_array[i][1]].className;
+        document.getElementById('game_board').rows[that.settings.winning_array[i][0]].cells[that.settings.winning_array[i][1]].className = name + " win";
     }
 }
 

@@ -28,7 +28,7 @@
                 <div id="options">
                     <p class="header">Algorithm</p>
                     <p>
-                        <select id="algorithm-select" autocomplete="off">
+                        <select id="algorithm-select" onchange="selectAlgorithm(this)" autocomplete="off">
                             <option value="minimax" selected>Minimax</option>
                             <option value="alphabeta">Alpha-Beta</option>
                         </select>
@@ -60,6 +60,12 @@
                 </div>
             </div>
         </div>
+
+        <script>
+        function selectAlgorithm(that) {
+            window.location = '../' + that.value + '/index.html';
+        };
+        </script>
 
         <script src="js/board.js"></script>
         <script src="js/fourconnect.js"></script>

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Artificial Intelligence based on the Minimax- and α-β-Pruning principles.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Connect Four - Minimax Algorithm</title>
+        <title>Connect Four - Alpha-Beta Algorithm</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -14,7 +14,7 @@
         </div>
         
         <div id="container">
-            <h1 class="header-text">Minimax Algorithm</h1>
+            <h1 class="header-text">Alpha-Beta Algorithm</h1>
             <p class="text subheader-text">
                 Artificial Intelligence based on the Minimax- and α-β-Pruning principles.
             </p>
@@ -28,9 +28,9 @@
                 <div id="options">
                     <p class="header">Algorithm</p>
                     <p>
-                        <select id="algorithm-select" autocomplete="off">
-                            <option value="minimax" selected>Minimax</option>
-                            <option value="alphabeta">Alpha-Beta</option>
+                        <select id="algorithm-select" onchange="selectAlgorithm(this)" autocomplete="off">
+                            <option value="minimax">Minimax</option>
+                            <option value="alphabeta" selected>Alpha-Beta</option>
                         </select>
                     </p>
                     <p class="header">Difficulty</p>
@@ -60,6 +60,12 @@
                 </div>
             </div>
         </div>
+
+        <script>
+        function selectAlgorithm(that) {
+            window.location = '../' + that.value + '/index.html';
+        };
+        </script>
 
         <script src="js/board.js"></script>
         <script src="js/fourconnect.js"></script>

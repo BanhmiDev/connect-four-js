@@ -22,7 +22,7 @@ h1 {
     margin-left: -255px;
 }
 
-.box-links {
+.box-left {
     overflow: hidden;
 }
 
@@ -56,10 +56,6 @@ h1 {
     width: 51px;
     height: 51px;
     border-radius: 50%;
-}
-
-.beendet td:hover::after{
-    background-color: transparent !important;
 }
 
 #game_board td {
