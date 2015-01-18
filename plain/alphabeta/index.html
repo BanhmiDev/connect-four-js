@@ -5,41 +5,48 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Artificial Intelligence based on the Minimax- and α-β-Pruning principles.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Four Connect - Minimax Algorithm (+ α β)</title>
+        <title>Connect Four - Minimax Algorithm</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        <div id="navigation">
+            <span class="title">Connect Four JS -</span> <a href="../../">Go to index »</a>
+        </div>
+        
         <div id="container">
-            <h1 class="oben-text">Minimax Algorithmus (+ α-β)</h1>
-            <p class="text unten-text">
+            <h1 class="header-text">Minimax Algorithm</h1>
+            <p class="text subheader-text">
                 Artificial Intelligence based on the Minimax- and α-β-Pruning principles.
             </p>
 
-            <div class="box-links">
-                <table id="spielfeld" cellpadding="0"></table> 
-                <div id="laden">AI is thinking...</div>
+            <div class="box-left">
+                <table id="game_board" cellpadding="0"></table> 
+                <div id="loading">AI is thinking...</div>
             </div>
 
-            <div class="box-links">
-                <table id="spielfeld" cellpadding="0"></table> 
-                <div id="laden">AI is thinking...</div>
-            </div>
-
-            <div class="box-rechts">
-                <div id="optionen">
-                    <p>Difficulty</p>
-                    <p><select id="schwierigkeit" autocomplete="off">
+            <div class="box-right">
+                <div id="options">
+                    <p class="header">Algorithm</p>
+                    <p>
+                        <select id="algorithm-select" autocomplete="off">
+                            <option value="minimax" selected>Minimax</option>
+                            <option value="alphabeta">Alpha-Beta</option>
+                        </select>
+                    </p>
+                    <p class="header">Difficulty</p>
+                    <p>
+                        <select id="difficulty" autocomplete="off">
                             <option value="1">Depth 1</option>
                             <option value="2">Depth 2 (Passive)</option>
                             <option value="3">Depth 3</option>
-                            <option value="4" selected="selected">Tiefe 4 (Easy)</option>
+                            <option value="4" selected="selected">Depth 4 (Easy)</option>
                             <option value="5">Depth 5</option>
                             <option value="6">Depth 6 (Moderate)</option>
                             <option value="7">Depth 7</option>
                             <option value="8">Depth 8 (Tougher)</option>
                         </select>
                     </p>
-                    <p><button class="speichern" onclick="spielNeustarten();" type="submit">Restart game</button></p>
+                    <p><button class="save" onclick="Game.restartGame();" type="submit">Restart game</button></p>
                 </div>
 
                 <div id="debug">
@@ -49,12 +56,12 @@
                     <p><span id="ai-column">Column: ?</span></p>
                     <p><span id="ai-score">Score: ?</span></p>
                     <br/>
-                    <p>Status: <span id="status" class="status-aktiv">running</span></p>
+                    <p>Status: <span id="status" class="status-running">running</span></p>
                 </div>
             </div>
         </div>
 
-        <script src="js/brett.js"></script>
-        <script src="js/viergewinnt.js"></script>
+        <script src="js/board.js"></script>
+        <script src="js/fourconnect.js"></script>
     </body>
 </html>
