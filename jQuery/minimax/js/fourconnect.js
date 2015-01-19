@@ -3,16 +3,14 @@
  * @jQuery version
  */
 function Game() {
-    this.settings = {
-        'hoehe': 6, // height
-        'breite': 7, // width
-        'status': 0, // 0: running, 1: won, 2: lost, 3: tie
-        'depth': 4, // Search depth
-        'score': 100000, // Win/loss score
-        'round': 0, // 0: Human, 1: Computer
-        'winning_array': [], // winning (chips) array
-        'iteration': 0 // iteration count
-    }
+    this.rows = 6; // Height
+    this.columns = 7; // Width
+    this.status = 0; // 0: running, 1: won, 2: lost, 3: tie
+    this.depth = 4; // Search depth
+    this.score = 100000, // Win/loss score
+    this.round = 0; // 0: Human, 1: Computer
+    this.winning_array = []; // Winning (chips) array
+    this.iterations = 0; // Iteration count
     
     that = this;
 
@@ -22,9 +20,9 @@ function Game() {
 Game.prototype.init = function() {
     // Generate 'real' board
     // Create 2-dimensional array
-    var game_board = new Array(that.settings.hoehe);
+    var game_board = new Array(that.rows);
     for (var i = 0; i < game_board.length; i++) {
-        game_board[i] = new Array(that.settings.breite);
+        game_board[i] = new Array(that.columns);
 
         for (var j = 0; j < game_board[i].length; j++) {
             game_board[i][j] = null;
@@ -36,9 +34,9 @@ Game.prototype.init = function() {
 
     // Generate visual board
     var game_board = "<col/><col/><col/><col/><col/><col/><col/>";
-    for (var i = 0; i < that.settings.hoehe; i++) {
+    for (var i = 0; i < that.rows; i++) {
         game_board += "<tr>";
-        for (var j = 0; j < that.settings.breite; j++) {
+        for (var j = 0; j < that.columns; j++) {
             game_board += "<td class='empty'></td>";
         }
         game_board += "</tr>";
@@ -66,7 +64,7 @@ Game.prototype.act = function(e) {
 
     // Check if not in animation and start with human
     if (!($('#coin').is(":animated"))) {
-        if (that.settings.round == 0) {
+        if (that.round == 0) {
             that.place(element.cellIndex);
         }
     }
@@ -75,10 +73,10 @@ Game.prototype.act = function(e) {
 /* Todo: Fix this jQuery mess */
 Game.prototype.place = function(column) {
     // If not finished
-    if (that.board.score() != that.settings.score && that.board.score() != -that.settings.score && !that.board.isFull()) {
-        for (var y = that.settings.hoehe - 1; y >= 0; y--) {
+    if (that.board.score() != that.score && that.board.score() != -that.score && !that.board.isFull()) {
+        for (var y = that.rows - 1; y >= 0; y--) {
             if (document.getElementById('game_board').rows[y].cells[column].className == 'empty') {
-                if (that.settings.round == 1) {
+                if (that.round == 1) {
                     var coin_x = column * 51;
                     var coin_y = y * 51;
                     $('#coin').attr('class', 'cpu-coin').css({'left': coin_x}).fadeIn('fast').animate({'top': coin_y + 'px'}, 700, 'easeOutBounce', function() {
@@ -89,7 +87,7 @@ Game.prototype.place = function(column) {
                             return alert("Invalid move!");
                         }
 
-                        that.settings.round = that.switchRound(that.settings.round);
+                        that.round = that.switchRound(that.round);
                         that.updateStatus();
                     });
                 } else {
@@ -104,7 +102,7 @@ Game.prototype.place = function(column) {
                             return alert("Invalid move!");
                         }
 
-                        that.settings.round = that.switchRound(that.settings.round);
+                        that.round = that.switchRound(that.round);
                         that.updateStatus();
                     });
                 }
@@ -115,8 +113,8 @@ Game.prototype.place = function(column) {
 }
 
 Game.prototype.generateComputerDecision = function() {
-    if (that.board.score() != that.settings.score && that.board.score() != -that.settings.score && !that.board.isFull()) {
-        that.settings.iteration = 0; // Reset iteration count
+    if (that.board.score() != that.score && that.board.score() != -that.score && !that.board.isFull()) {
+        that.iterations = 0; // Reset iteration count
         document.getElementById('loading').style.display = "block"; // Loading message
 
         // AI is thinking
@@ -125,7 +123,7 @@ Game.prototype.generateComputerDecision = function() {
             var startzeit = new Date().getTime();
 
             // Algorithm call
-            var ai_move = that.maximizePlay(that.board, that.settings.depth);
+            var ai_move = that.maximizePlay(that.board, that.depth);
 
             var laufzeit = new Date().getTime() - startzeit;
             document.getElementById('ai-time').innerHTML = laufzeit.toFixed(2) + 'ms';
@@ -136,7 +134,7 @@ Game.prototype.generateComputerDecision = function() {
             // Debug
             document.getElementById('ai-column').innerHTML = 'Column: ' + parseInt(ai_move[0] + 1);
             document.getElementById('ai-score').innerHTML = 'Score: ' + ai_move[1];
-            document.getElementById('ai-iterations').innerHTML = that.settings.iteration;
+            document.getElementById('ai-iterations').innerHTML = that.iterations;
 
             document.getElementById('loading').style.display = "none"; // Remove loading message
         }, 100);
@@ -158,12 +156,12 @@ Game.prototype.maximizePlay = function(board, depth) {
     var max = [null, -99999];
 
     // For all possible moves
-    for (var column = 0; column < that.settings.breite; column++) {
+    for (var column = 0; column < that.columns; column++) {
         var new_board = board.copy(); // Create new board
 
         if (new_board.place(column)) {
 
-            that.settings.iteration++; // Debug
+            that.iterations++; // Debug
 
             var next_move = that.minimizePlay(new_board, depth - 1); // Recursive calling
 
@@ -186,12 +184,12 @@ Game.prototype.minimizePlay = function(board, depth) {
     // Column, score
     var min = [null, 99999];
 
-    for (var column = 0; column < that.settings.breite; column++) {
+    for (var column = 0; column < that.columns; column++) {
         var new_board = board.copy();
 
         if (new_board.place(column)) {
 
-            that.settings.iteration++;
+            that.iterations++;
 
             var next_move = that.maximizePlay(new_board, depth - 1);
 
@@ -199,7 +197,6 @@ Game.prototype.minimizePlay = function(board, depth) {
                 min[0] = column;
                 min[1] = next_move[1];
             }
-
         }
     }
     return min;
@@ -216,33 +213,33 @@ Game.prototype.switchRound = function(round) {
 
 Game.prototype.updateStatus = function() {
     // Human won
-    if (that.board.score() == -that.settings.score) {
-        that.settings.status = 1;
+    if (that.board.score() == -that.score) {
+        that.status = 1;
         that.markWin();
         alert("You have won!");
     }
 
     // Computer won
-    if (that.board.score() == that.settings.score) {
-        that.settings.status = 2;
+    if (that.board.score() == that.score) {
+        that.status = 2;
         that.markWin();
         alert("You have lost!");
     }
 
     // Tie
     if (that.board.isFull()) {
-        that.settings.status = 3;
+        that.status = 3;
         alert("Tie!");
     }
 
     var html = document.getElementById('status');
-    if (that.settings.status == 0) {
+    if (that.status == 0) {
         html.className = "status-running";
         html.innerHTML = "running";
-    } else if (that.settings.status == 1) {
+    } else if (that.status == 1) {
         html.className = "status-won";
         html.innerHTML = "won";
-    } else if (that.settings.status == 2) {
+    } else if (that.status == 2) {
         html.className = "status-lost";
         html.innerHTML = "lost";
     } else {
@@ -252,9 +249,9 @@ Game.prototype.updateStatus = function() {
 }
 
 Game.prototype.markWin = function() {
-    for (var i = 0; i < that.settings.winning_array.length; i++) {
-        var name = document.getElementById('game_board').rows[that.settings.winning_array[i][0]].cells[that.settings.winning_array[i][1]].className;
-        document.getElementById('game_board').rows[that.settings.winning_array[i][0]].cells[that.settings.winning_array[i][1]].className = name + " win";
+    for (var i = 0; i < that.winning_array.length; i++) {
+        var name = document.getElementById('game_board').rows[that.winning_array[i][0]].cells[that.winning_array[i][1]].className;
+        document.getElementById('game_board').rows[that.winning_array[i][0]].cells[that.winning_array[i][1]].className = name + " win";
     }
 }
 
@@ -263,9 +260,9 @@ Game.prototype.restartGame = function() {
         // Dropdown value
         var difficulty = document.getElementById('difficulty');
         var depth = difficulty.options[difficulty.selectedIndex].value;
-        that.settings.depth = depth;
-        that.settings.status = 0;
-        that.settings.round = 0;
+        that.depth = depth;
+        that.status = 0;
+        that.round = 0;
         that.init();
         document.getElementById('ai-iterations').innerHTML = "?";
         document.getElementById('ai-time').innerHTML = "?";

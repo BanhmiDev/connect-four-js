@@ -9,7 +9,7 @@ function Board(game, feld, player) {
 
 Board.prototype.isFinished = function(depth, score) {
     // depth erreicht oder Spiel entschieden
-    if (depth == 0 || score == this.game.settings.score || score == -this.game.settings.score || this.isFull()) {
+    if (depth == 0 || score == this.game.score || score == -this.game.score || this.isFull()) {
         return true;
     }
     return false;
@@ -21,9 +21,9 @@ Board.prototype.isFinished = function(depth, score) {
 Board.prototype.place = function(spalte) {
     // Falls Spalte gültig ist
     // 1. leer und 2. nicht außerhalb des Arrays
-    if (this.feld[0][spalte] == null && spalte >= 0 && spalte < this.game.settings.breite) {
+    if (this.feld[0][spalte] == null && spalte >= 0 && spalte < this.game.columns) {
         // Von unten nach oben
-        for (var y = this.game.settings.hoehe - 1; y >= 0; y--) {
+        for (var y = this.game.rows - 1; y >= 0; y--) {
             if (this.feld[y][spalte] == null) {
                 this.feld[y][spalte] = this.player; // Setzen des jeweiligen Steins
                 break; // Einmalig
@@ -42,16 +42,16 @@ Board.prototype.place = function(spalte) {
 Board.prototype.bewerten = function(reihe, spalte, delta_y, delta_x) {
     var human_points = 0;
     var computer_points = 0;
-    this.game.settings.winning_array_human = [];
-    this.game.settings.winning_array_cpu = [];
+    this.game.winning_array_human = [];
+    this.game.winning_array_cpu = [];
 
     // Determine score through amount of available chips
     for (var i = 0; i < 4; i++) {
         if (this.feld[reihe][spalte] == 0) {
-            this.game.settings.winning_array_human.push([reihe, spalte]);
+            this.game.winning_array_human.push([reihe, spalte]);
             human_points++; // Add for each human chip
         } else if (this.feld[reihe][spalte] == 1) {
-            this.game.settings.winning_array_cpu.push([reihe, spalte]);
+            this.game.winning_array_cpu.push([reihe, spalte]);
             computer_points++; // Add for each computer chip
         }
 
@@ -62,13 +62,13 @@ Board.prototype.bewerten = function(reihe, spalte, delta_y, delta_x) {
 
     // Marking winning/returning score
     if (human_points == 4) {
-        this.game.settings.winning_array = this.game.settings.winning_array_human;
+        this.game.winning_array = this.game.winning_array_human;
         // Computer won (100000)
-        return -this.game.settings.score;
+        return -this.game.score;
     } else if (computer_points == 4) {
-        this.game.settings.winning_array = this.game.settings.winning_array_cpu;
+        this.game.winning_array = this.game.winning_array_cpu;
         // Human won (-100000)
-        return this.game.settings.score;
+        return this.game.score;
     } else {
         // Return normal points
         return computer_points;
@@ -99,13 +99,13 @@ Board.prototype.score = function() {
     // [x][x][x][ ][ ][ ][ ] 3
     // [ ][x][x][ ][ ][ ][ ] 4
     // [ ][ ][x][ ][ ][ ][ ] 5
-    for (var reihe = 0; reihe < this.game.settings.hoehe - 3; reihe++) {
+    for (var reihe = 0; reihe < this.game.rows - 3; reihe++) {
         // Für jede Spalte überprüfen
-        for (var spalte = 0; spalte < this.game.settings.breite; spalte++) {
+        for (var spalte = 0; spalte < this.game.columns; spalte++) {
             // Die Spalte bewerten und zu den Punkten hinzufügen
             var score = this.bewerten(reihe, spalte, 1, 0);
-            if (score == this.game.settings.score) return this.game.settings.score;
-            if (score == -this.game.settings.score) return -this.game.settings.score;
+            if (score == this.game.score) return this.game.score;
+            if (score == -this.game.score) return -this.game.score;
             vertikale_punkte += score;
         }            
     }
@@ -121,11 +121,11 @@ Board.prototype.score = function() {
     // [ ][ ][ ][x][x][x][x] 3
     // [ ][ ][ ][ ][ ][ ][ ] 4
     // [ ][ ][ ][ ][ ][ ][ ] 5
-    for (var reihe = 0; reihe < this.game.settings.hoehe; reihe++) {
-        for (var spalte = 0; spalte < this.game.settings.breite - 3; spalte++) { 
+    for (var reihe = 0; reihe < this.game.rows; reihe++) {
+        for (var spalte = 0; spalte < this.game.columns - 3; spalte++) { 
             var score = this.bewerten(reihe, spalte, 0, 1);   
-            if (score == this.game.settings.score) return this.game.settings.score;
-            if (score == -this.game.settings.score) return -this.game.settings.score;
+            if (score == this.game.score) return this.game.score;
+            if (score == -this.game.score) return -this.game.score;
             horizontale_punkte += score;
         } 
     }
@@ -141,11 +141,11 @@ Board.prototype.score = function() {
     // [ ][ ][ ][x][ ][ ][ ] 3
     // [ ][ ][ ][ ][ ][ ][ ] 4
     // [ ][ ][ ][ ][ ][ ][ ] 5
-    for (var reihe = 0; reihe < this.game.settings.hoehe - 3; reihe++) {
-        for (var spalte = 0; spalte < this.game.settings.breite - 3; spalte++) {
+    for (var reihe = 0; reihe < this.game.rows - 3; reihe++) {
+        for (var spalte = 0; spalte < this.game.columns - 3; spalte++) {
             var score = this.bewerten(reihe, spalte, 1, 1);
-            if (score == this.game.settings.score) return this.game.settings.score;
-            if (score == -this.game.settings.score) return -this.game.settings.score;
+            if (score == this.game.score) return this.game.score;
+            if (score == -this.game.score) return -this.game.score;
             diagonale_punkte1 += score;
         }            
     }
@@ -158,11 +158,11 @@ Board.prototype.score = function() {
     // [ ][ ][ ][ ][ ][ ][ ] 4
     // [ ][ ][ ][ ][ ][ ][ ] 5
     // Diagonale Punkte (von rechts unten)
-    for (var reihe = 3; reihe < this.game.settings.hoehe; reihe++) {
-        for (var spalte = 0; spalte <= this.game.settings.breite - 4; spalte++) {
+    for (var reihe = 3; reihe < this.game.rows; reihe++) {
+        for (var spalte = 0; spalte <= this.game.columns - 4; spalte++) {
             var score = this.bewerten(reihe, spalte, -1, +1);
-            if (score == this.game.settings.score) return this.game.settings.score;
-            if (score == -this.game.settings.score) return -this.game.settings.score;
+            if (score == this.game.score) return this.game.score;
+            if (score == -this.game.score) return -this.game.score;
             diagonale_punkte2 += score;
         }
 
@@ -176,7 +176,7 @@ Board.prototype.score = function() {
  * Determine if board is full
  */
 Board.prototype.isFull = function() {
-    for (var i = 0; i < this.game.settings.breite; i++) {
+    for (var i = 0; i < this.game.columns; i++) {
         if (this.feld[0][i] == null) {
             return false;
         }
