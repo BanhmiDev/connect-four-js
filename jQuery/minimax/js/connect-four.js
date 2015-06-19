@@ -70,7 +70,9 @@ Game.prototype.act = function(e) {
     }
 }
 
-/* Todo: Fix this jQuery mess */
+/**
+ * Place coin
+ */
 Game.prototype.place = function(column) {
     // If not finished
     if (that.board.score() != that.score && that.board.score() != -that.score && !that.board.isFull()) {

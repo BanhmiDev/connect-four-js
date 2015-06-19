@@ -58,10 +58,6 @@ h1 {
     border-radius: 50%;
 }
 
-#game_board td {
-    border-radius: 50%;
-}
-
 #game_board .coin {
     cursor: default;
 }
