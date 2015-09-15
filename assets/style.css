@@ -1,0 +1,324 @@
+/* SITE-SPECIFIC STYLING STARTS HERE */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    background: #303030;
+    font-family: "Roboto", sans-serif;
+    width: 600px;
+    margin: 0 auto;
+}
+
+#main {
+    text-align: left;
+    font-size: 12pt;
+    color: #C0C0C0;
+}
+
+.sup3 {
+    font-size: 50%;
+    top: -0.75em;
+}
+
+strong {
+    color: #FFFFFF;
+}
+
+b {
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+.tiny {
+    font-size: 9pt;
+}
+
+.red {
+    color: #FF4040;
+}
+
+.green {
+    color: #40C040;
+}
+
+.blue {
+    color: #8080FF;
+}
+
+.white {
+	color: #FFFFFF;
+}
+
+a {
+    color: #FFFFFF; /* #6A98BA; */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+#header p {
+    font-size: 32pt;
+    font-weight: 100;
+    margin: 16px 0 0 0;
+}
+
+.subhead {
+    font-size: 18pt;
+    color: #FFFFFF;
+}
+
+.subhead a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.subhead a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.subitem {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.notebox {
+    background-color: #404040;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+.sound {
+    font-size: 12pt;
+    color: #C0C0C0;
+    font-weight: normal;
+}
+
+.sound a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.sound a:hover {
+    text-decoration: underline;
+}
+
+.section {
+    border-top: solid 1px #C0C0C0;
+}
+
+.specs {
+    color: #C0C0C0;
+    background-color: #404040;
+    font-weight: bold;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.specs b {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.specs a {
+    color: #FFFFFF;
+    font-style: italic;
+    text-decoration: none;
+}
+
+.specs a:hover {
+    color: #FFFFFF;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.notice {
+    color: #C0C0C0;
+    background-color: #404040;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.code {
+    color: #C0FFC0;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+}
+
+.example {
+    color: #C0FFC0;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    background-color: #404040;
+    padding-left: 1em;
+    padding-right: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+}
+
+.dot {
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: #303030;
+    border: 0;
+    margin-top: 16px;
+}
+
+.select a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.select a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.tab1 {
+	float: left;
+	min-width: 2em;
+}
+
+.tab2 {
+	float: left;
+	min-width: 4em;
+}
+
+.tab3 {
+	float: left;
+	min-width: 6em;
+}
+
+.tab4 {
+	float: left;
+	min-width: 8em;
+}
+
+.tab5 {
+	float: left;
+	min-width: 10em;
+}
+
+.tab6 {
+	float: left;
+	min-width: 12em;
+}
+
+#footer {
+    border-top: solid 1px #C0C0C0;
+    font-size: 9pt;
+    color: #808080;
+}
+
+#footer a {
+    color: #C0C0C0;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+#nav {
+    font-size: 14pt;
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+    float: left;
+    width: 100%;
+
+    /* Bring the nav above everything else--uncomment if needed. */
+
+    /* position: relative; z-index: 5; */
+}
+
+#nav li {
+    float: left;
+    position: relative;
+    padding-right: 0;
+    margin-right: 8px; /* spacing of menu items */
+}
+
+#nav a {
+    display: block;
+    padding: 4px;
+    color: #C0C0C0;
+    background: #303030;
+    text-decoration: none;
+}
+
+#nav a:hover {
+    color: #FFFFFF;
+    background: #505050;
+    text-decoration: none;
+}
+
+/* Dropdowns */
+
+#nav ul {
+    /* background: #FFFFFF;	background: rgba(255,255,255,0); */
+    list-style: none;
+    position: absolute;
+    left: -9999px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#nav ul li {
+    border-top: solid 1px #303030;
+    float: none;
+}
+
+#nav ul a {
+    white-space: nowrap;
+}
+
+#nav li:hover ul {
+    left: 2em; /* This is the horizontal offset */
+}
+
+#nav li:hover a {
+    color: #FFFFFF;
+    background: #606060;
+    text-decoration: none;
+}
+
+#nav li:hover ul a {
+    text-decoration: none;
+}
+
+#nav li:hover ul li a:hover {
+    color: #000000;
+    background: #C0C0C0;
+}
+
+@media (max-width: 860px) {
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    #header, #main, #footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
